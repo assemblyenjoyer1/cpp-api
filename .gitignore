@@ -1,0 +1,105 @@
+# Visual Studio Code specific
+.vscode/
+.vscode/*
+
+# macOS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Icon?
+._*
+DocumentRevisions-V100
+.TemporaryItems
+.apDisk
+.fseventsd
+
+# C++ specific
+*.obj
+*.o
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.exe
+*.out
+*.app
+*.i
+*.ii
+*.s
+*.swp
+*.d
+*.dSYM/
+*.orig
+*.gch
+
+# CMake specific
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CMakeLists.txt.user
+CTestTestfile.cmake
+Makefile
+
+# Conan specific
+conanbuildinfo.txt
+conaninfo.txt
+graph_info.json
+conan.lock
+build/
+
+# Compile commands
+compile_commands.json
+
+# IDE specific
+.idea/
+*.iml
+
+# Logs
+*.log
+*.tlog
+*.vlog
+*.trace
+*.vscode/
+*.xcworkspace
+
+# Binary files
+*.bin
+*.elf
+*.hex
+
+# Other
+*.swp
+*~
+
+# Ignore compiled object files and static libraries
+*.obj
+*.o
+*.a
+*.lib
+
+# Ignore shared object files (Windows, Mac, Linux)
+*.dll
+*.dylib
+*.so
+*.jar
+*.war
+*.ear
+
+# Ignore executable files
+*.exe
+*.out
+*.app
+
+# Ignore debug and release directories
+debug/
+release/
+
+# Ignore build directories
+build/
+cmake-build-debug/
+cmake-build-release/
