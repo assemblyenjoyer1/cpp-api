@@ -104,6 +104,24 @@ std::string get_response_for_daniel() {
     return create_response("200 OK", body);
 }
 
+std::string get_response_for_customer() {
+    Customer streamline("Streamline", "Daniel Auer", 12345);
+
+    auto json = streamline.toJson();
+    std::string body = json.dump();
+
+    return create_response("200 OK", body);
+}
+
+std::string get_response_for_support() {
+    Customer baltic("B@ltic", "Timo Reiss", 54321);
+
+    auto json = baltic.toJson();
+    std::string body = json.dump();
+
+    return create_response("200 OK", body);
+}
+
 std::string get_response_for_jsontopology() {
     std::string json_data = convert_vector_to_json(network_topology);
 
@@ -402,6 +420,10 @@ void handle_client(int client_socket) {
         response = get_response_for_test();
     } else if (url == "/daniel") {
         response = get_response_for_daniel();
+    } else if (url == "/customer") {
+        response = get_response_for_customer();
+    } else if (url == "/support") {
+        response = get_response_for_support();
     } else if (url == "/ports") {
         std::string html_body = generate_network_topology_html();
         response = create_html_response("200 OK", html_body);
