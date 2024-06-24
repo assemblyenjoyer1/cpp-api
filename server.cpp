@@ -325,6 +325,10 @@ std::string generate_ipam_html()
     return table_html;
 }
 
+std::string generate_swagger_html(){
+    return api::read_file_to_string("../swagger/swagger.html");
+}
+
 std::string generate_homepage_html()
 {
     std::string table_html = R"(
@@ -432,6 +436,11 @@ void handle_client(int client_socket)
     else if (url == "/")
     {
         std::string html_body = generate_homepage_html();
+        response = api::create_response(api::status_code::OK, html_body, api::content_type::HTML);
+    }
+    else if (url == "/swagger")
+    {
+        std::string html_body = generate_swagger_html();
         response = api::create_response(api::status_code::OK, html_body, api::content_type::HTML);
     }
     else if (url == "/jsontopology")

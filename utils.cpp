@@ -60,3 +60,19 @@ std::string api::create_response(const status_code &status, const std::string &b
     response += "\r\n" + body;
     return response;
 }
+
+std::string api::read_file_to_string(const std::string& file_path)
+{
+    std::ifstream file(file_path);
+    if (file)
+    {
+        std::ostringstream ss;
+        ss << file.rdbuf();
+        return ss.str();
+    }
+    else
+    {
+        std::cerr << "Failed to open file: " << file_path << std::endl;
+        return "";
+    }
+}
