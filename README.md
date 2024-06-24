@@ -1,5 +1,8 @@
-# cpp-api
+# CPP-API
 
+### API documentation
+
+[Open Swagger UI](http://localhost:8080/swagger)
 
 ### Test endpoint
 ```bash
