@@ -25,6 +25,8 @@ add_executable(api
   server.h
   server.cpp
   student.h
+  utils.h
+  utils.cpp
 )
 target_link_libraries(api PRIVATE nlohmann_json::nlohmann_json)
 
@@ -34,6 +36,9 @@ add_executable(api_test
   server.h
   server.cpp
   student.h
+  utils.h
+  utils.cpp
+  utils_test.cpp
 )
 
 target_link_libraries(api_test PRIVATE nlohmann_json::nlohmann_json GTest::gtest_main)

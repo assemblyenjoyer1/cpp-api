@@ -57,22 +57,6 @@ std::vector<std::unordered_map<std::string, std::string>> ipam = {
         {{"Netz", "FD00:3:4::2"}, {"Subnetzmaske", "64"}, {"VLAN", "Keine"}, {"Kategorie", "Transportnetz"}, {"Beschreibung", "Muenchen-Berlin"}}
 };
 
-std::string convert_vector_to_json(std::vector<std::unordered_map<std::string, std::string>> vector) {
-    nlohmann::json j;
-
-    for (const auto& entry : vector) {
-        nlohmann::json entry_json;
-
-        for (const auto& pair : entry) {
-            entry_json[pair.first] = pair.second;
-        }
-
-        j.push_back(entry_json);
-    }
-
-    return j.dump();
-}
-
 
 std::string create_response(const std::string& status, const std::string& body) {
     std::string response = "HTTP/1.1 " + status + "\r\n";
@@ -123,13 +107,13 @@ std::string get_response_for_support() {
 }
 
 std::string get_response_for_jsontopology() {
-    std::string json_data = convert_vector_to_json(network_topology);
+    std::string json_data = api::convert_vector_to_json(network_topology);
 
     return create_response("200 OK", json_data);
 }
 
 std::string get_response_for_jsonipam() {
-    std::string json_data = convert_vector_to_json(ipam);
+    std::string json_data = api::convert_vector_to_json(ipam);
 
     return create_response("200 OK", json_data);
 }
