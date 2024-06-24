@@ -1,6 +1,6 @@
 #include "server.h"
 
-bool debug = false;
+bool debug = true;
 
 std::vector<std::unordered_map<std::string, std::string>> network_topology = {
     {{"Device", "DNS-WebServer (B)"}, {"Interface", "Fa0"}, {"Mode", "Access"}, {"Connected To", "SwitchNetz3"}, {"Connected Interface", "Gig 1/0/1"}, {"VLAN", "VLAN 50"}, {"IP Address", "2001:DB8:3:50::2"}, {"Location", "Berlin"}},
@@ -119,6 +119,38 @@ std::string get_response_for_jsonipam() {
 std::string get_response_for_404() {
     std::string body = "404 Not Found. Endpoint does not exist.";
     return create_response("404 Not Found", body);
+}
+
+std::string get_connection_by_device(const std::string& device_name) {
+    nlohmann::json result = nlohmann::json::array();
+    
+    for (const auto& entry : network_topology) {
+        if (entry.at("Device") == device_name) {
+            nlohmann::json connection;
+            for (const auto& pair : entry) {
+                connection[pair.first] = pair.second;
+            }
+            result.push_back(connection);
+        }
+    }
+
+    return create_response("200 OK", result.dump());
+}
+
+std::string get_connection_by_interface(const std::string& interface) {
+    nlohmann::json result = nlohmann::json::array();
+    
+    for (const auto& entry : network_topology) {
+        if (entry.at("Interface") == interface) {
+            nlohmann::json connection;
+            for (const auto& pair : entry) {
+                connection[pair.first] = pair.second;
+            }
+            result.push_back(connection);
+        }
+    }
+
+    return create_response("200 OK", result.dump());
 }
 
 std::string generate_network_topology_html() {
@@ -381,11 +413,15 @@ void handle_client(int client_socket) {
         response = create_html_response("200 OK", html_body);
     } else if (url == "/jsontopology") {
         response = get_response_for_jsontopology();
+    } else if (url.find("/device/") == 0) {
+        std::string device_name = url.substr(8);
+        response = get_connection_by_device(device_name);
+    } else if (url.find("/interface/") == 0) {
+        std::string interface = url.substr(11);
+        response = get_connection_by_interface(interface);
     } else if (url == "/jsonipam") {
         response = get_response_for_jsontopology();
-    } 
-    
-    else {
+    } else {
         response = get_response_for_404();
     }
 
@@ -440,4 +476,4 @@ void start_server() {
     }
 }
 
-//Compile: g++ -std=c++11 -o server main.cpp server.cpp  
+//Compile: g++ -std=c++11 -o server main.cpp server.cpp
