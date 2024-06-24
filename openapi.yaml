@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  title: CppAPI
+  description: API Documentation for CppAPI
+  version: 1.0.0
+paths:
+  /customer:
+    get:
+      summary: Get Customer
+      description: ''
+      operationId: getCustomer
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      parameters: []
+  /support:
+    get:
+      summary: Get Support
+      description: ''
+      operationId: getSupport
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      parameters: []
+  /jsonipam:
+    get:
+      summary: Get IPAM
+      description: ''
+      operationId: getIpam
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      parameters: []
+  /jsontopology:
+    get:
+      summary: Get Topology
+      description: ''
+      operationId: getTopology
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      parameters: []
+  /device/{name}:
+    get:
+      summary: Get Connection by Devicename
+      description: ''
+      operationId: getConnectionByDevicename
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+          description: Name of the device to get the connection
+  /interface/{name}:
+    get:
+      summary: Get Connection by Interface
+      description: ''
+      operationId: getConnectionByInterface
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+          description: Name of the interface to get the connection
+      
