@@ -28,3 +28,51 @@ TEST(utils, convert_vector_to_json)
 
     EXPECT_EQ(result, expected);
 }
+
+TEST(utils, create_response_200_plain)
+{
+    const std::string status = "200 OK";
+    const std::string body = "I am a test body";
+    std::ostringstream responseSS;
+    responseSS << "HTTP/1.1 " << status << "\r\n"
+    << "Content-Type: text/plain\r\n"
+    << "Content-Length: " << body.length() << "\r\n"
+    << "\r\n" << body;
+    const std::string expectedResponse = responseSS.str();
+
+    const std::string result = api::create_response(api::status_code::OK, body, api::content_type::PLAIN);
+
+    EXPECT_EQ(result, expectedResponse);
+}
+
+TEST(utils, create_response_404_plain)
+{
+    const std::string status = "404 NOT FOUND";
+    const std::string body = "I am a test body";
+    std::ostringstream responseSS;
+    responseSS << "HTTP/1.1 " << status << "\r\n"
+    << "Content-Type: text/plain\r\n"
+    << "Content-Length: " << body.length() << "\r\n"
+    << "\r\n" << body;
+    const std::string expectedResponse = responseSS.str();
+
+    const std::string result = api::create_response(api::status_code::NOT_FOUND, body, api::content_type::PLAIN);
+
+    EXPECT_EQ(result, expectedResponse);
+}
+
+TEST(utils, create_response_200_html)
+{
+    const std::string status = "200 OK";
+    const std::string body = "I am a test body";
+    std::ostringstream responseSS;
+    responseSS << "HTTP/1.1 " << status << "\r\n"
+    << "Content-Type: text/html\r\n"
+    << "Content-Length: " << body.length() << "\r\n"
+    << "\r\n" << body;
+    const std::string expectedResponse = responseSS.str();
+
+    const std::string result = api::create_response(api::status_code::OK, body, api::content_type::HTML);
+
+    EXPECT_EQ(result, expectedResponse);
+}
